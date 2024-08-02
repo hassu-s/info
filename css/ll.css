@@ -183,3 +183,7 @@ span {
   background-color: #ffffff00;
 }
 
+::-webkit-scrollbar {
+    display: none;
+  }
+
