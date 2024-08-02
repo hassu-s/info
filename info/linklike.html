@@ -176,33 +176,16 @@
 </style>
 </head>
 <body>
-
 <div class="news-container" id="news-container">
-  <div class="news-item" data-type="announcement" data-published="2024/08/02 23:00" data-title="ニュースタイトル1" data-content="ニュースの内容がここに入ります。">
+  <div class="news-item" data-type="announcement" data-published="2024/07/08 23:00" data-title="はっすーずリンクラ攻略部リリースのお知らせ" 
+  data-content='<h1>リリースのお知らせ</h1>
+  <p>この度は、はっすーずリンクラ攻略部へアクセスしていただきありがとうございます。</p><p>こちらのサイトは、リンクラサークル「はっすーず」リーダーのさくらタコヤキがサイトを運営しております。</p><p>本サイトは、現在、アイテムフィルターのみをリリースしておりますが、今後、「リンクラカレンダー」「リンクラFAQ」などの機能を追加していく予定です。</p><p>本サイトのことを、どうぞよろしくお願いいたします。</p><a href="https://x.com/@biju_mama">X-びじゅママ</a>'>
     <div class="news-header">
       <div class="news-header-content">
         <div class="news-type announcement">お知らせ</div>
         <div class="news-date">2024/08/02 23:00</div>
       </div>
-      <div class="news-title">ニュースタイトル1</div>
-    </div>
-  </div>
-  <div class="news-item" data-type="update" data-published="2024/08/02 23:01" data-title="ニュースタイトル2" data-content="アップデートの内容がここに入ります。">
-    <div class="news-header">
-      <div class="news-header-content">
-        <div class="news-type update">アップデート</div>
-        <div class="news-date">2024/08/02 12:00</div>
-      </div>
-      <div class="news-title">ニュースタイトル2</div>
-    </div>
-  </div>
-  <div class="news-item" data-type="bug" data-published="2024/08/04 09:00" data-title="ニュースタイトル3" data-content="不具合の詳細がここに入ります。">
-    <div class="news-header">
-      <div class="news-header-content">
-        <div class="news-type bug">不具合</div>
-        <div class="news-date">2024/08/04 09:00</div>
-      </div>
-      <div class="news-title">ニュースタイトル3</div>
+      <div class="news-title">はっすーずリンクラ攻略部リリースのお知らせ</div>
     </div>
   </div>
 </div>
@@ -251,7 +234,7 @@
         popupNewsType.textContent = type === "announcement" ? "お知らせ" : type === "update" ? "アップデート" : "不具合";
         popupNewsDate.textContent = date;
         popupNewsTitle.textContent = title;
-        popupNewsContent.textContent = content;
+        popupNewsContent.innerHTML = content;
 
         popupNewsType.className = "news-type " + type;
         popup.style.display = 'flex';

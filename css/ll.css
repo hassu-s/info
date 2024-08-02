@@ -14,8 +14,10 @@
   }
 
 h1 {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 900;
+    text-align: center;
+    background-color: #ffffff00;
   }
 
 button {
@@ -50,8 +52,8 @@ button {
     position: absolute;
     width: 0;
     height: 0;
-    border-left: 30px solid rgba(255, 255, 255, 0.2); /* 三角のサイズを大きくし、透明度を若干濃くする */
-    border-bottom: 30px solid transparent;
+    border-left: 15px solid rgba(255, 255, 255, 0.2); /* 三角のサイズを大きくし、透明度を若干濃くする */
+    border-bottom: 15px solid transparent;
   }
   
   button::before {
@@ -100,19 +102,12 @@ button, a , div {
   }
 
   a {
-    font-size:160px;
+    font-size:14px;
   }
   .alink {
     font-size: 0px;
   }
 
-/* スマホ対応 */
-@media (max-width: 500px) {
-  h1 {
-    font-size: 23px;
-    text-align: center;
-  }
-}
 
 .pr1 {
   font-size: 17px;
