@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ニュースページ</title>
+<link href="../css/ll.css" rel="stylesheet" type="text/css">
 <style>
   * {
     font-family: 'Noto Sans JP' , sans-serif;
@@ -134,8 +135,10 @@
     font-weight: bold;
     position: sticky;
     top: 60px;
-    background-color: white;
+    background-color: #f0f0f0;
     z-index: 1000;
+    padding-top: 0px;
+    padding-bottom: 15px;
   }
 
   .popup-body {
@@ -157,7 +160,8 @@
 
   .popup-separator {
     border-bottom: 1px solid #ddd;
-    margin: 15px 0;
+    margin: 0px 0;
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.7);
   }
 
   @keyframes fadeIn {
@@ -170,8 +174,6 @@
     to { opacity: 0; }
   }
 </style>
-<link href="../css/ll.css" rel="stylesheet" type="text/css">
-
 </head>
 <body>
 
@@ -210,7 +212,7 @@
     <div class="popup-header">
       <div class="news-type" id="popup-news-type"></div>
       <div class="news-date" id="popup-news-date"></div>
-      <button class="popup-close" id="popup-close">&times;</button>
+      <button id="popup-close">&times;</button>
     </div>
     <div class="popup-title" id="popup-news-title"></div>
     <div class="popup-separator"></div>
