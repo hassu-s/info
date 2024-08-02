@@ -1,12 +1,281 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>はっすーずリンクラ攻略部</title>
-    <link href="../css/ll.css" rel="styleseet" type="text/css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ニュースページ</title>
+<style>
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    overflow-x: hidden;
+    font-size: 14px;
+  }
+
+  .news-container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 20px auto;
+  }
+
+  .news-item {
+    margin-bottom: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .news-item:hover {
+    transform: translateY(-2px);
+  }
+
+  .news-header {
+    padding: 10px 15px;
+  }
+
+  .news-header-content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+
+  .news-type {
+    width: 100px;
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px 0;
+    margin-right: 10px; /* 調整 */
+    font-weight: bold;
+    font-size: 0.9em;
+  }
+
+  .news-type.announcement {
+    background-color: rgb(0, 203, 0);
+  }
+
+  .news-type.update {
+    background-color: #ed1d93;
+  }
+
+  .news-type.bug {
+    background-color: rgb(83, 83, 83);
+  }
+
+  .news-date {
+    color: #555;
+    font-size: 0.8em;
+  }
+
+  .news-title {
+    font-size: 1em;
+    font-weight: bold;
+  }
+
+  .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  .popup-content {
+    background-color: white;
+    border-radius: 0px;
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .popup-header {
+    padding: 15px;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+  }
+
+  .popup-header .news-type,
+  .popup-header .news-date {
+    margin: 0;
+  }
+
+  .popup-title {
+    padding: 10px 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    position: sticky;
+    top: 60px;
+    background-color: white;
+    z-index: 1000;
+  }
+
+  .popup-body {
+    padding: 15px;
+    overflow-y: auto;
+  }
+
+  .popup-close {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .popup-close:hover {
+    color: red;
+  }
+
+  .popup-separator {
+    border-bottom: 1px solid #ddd;
+    margin: 15px 0;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+</style>
 </head>
 <body>
+
+<div class="news-container" id="news-container">
+  <div class="news-item" data-type="announcement" data-published="2024/08/02 23:00" data-title="ニュースタイトル1" data-content="ニュースの内容がここに入ります。">
+    <div class="news-header">
+      <div class="news-header-content">
+        <div class="news-type announcement">お知らせ</div>
+        <div class="news-date">2024/08/02 23:00</div>
+      </div>
+      <div class="news-title">ニュースタイトル1</div>
+    </div>
+  </div>
+  <div class="news-item" data-type="update" data-published="2024/08/02 23:01" data-title="ニュースタイトル2" data-content="アップデートの内容がここに入ります。">
+    <div class="news-header">
+      <div class="news-header-content">
+        <div class="news-type update">アップデート</div>
+        <div class="news-date">2024/08/02 12:00</div>
+      </div>
+      <div class="news-title">ニュースタイトル2</div>
+    </div>
+  </div>
+  <div class="news-item" data-type="bug" data-published="2024/08/04 09:00" data-title="ニュースタイトル3" data-content="不具合の詳細がここに入ります。">
+    <div class="news-header">
+      <div class="news-header-content">
+        <div class="news-type bug">不具合</div>
+        <div class="news-date">2024/08/04 09:00</div>
+      </div>
+      <div class="news-title">ニュースタイトル3</div>
+    </div>
+  </div>
+</div>
+
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <div class="popup-header">
+      <div class="news-type" id="popup-news-type"></div>
+      <div class="news-date" id="popup-news-date"></div>
+      <button class="popup-close" id="popup-close">&times;</button>
+    </div>
+    <div class="popup-title" id="popup-news-title"></div>
+    <div class="popup-separator"></div>
+    <div class="popup-body" id="popup-news-content"></div>
+  </div>
+</div>
+
+<script>
+  function compareDates(date1, date2) {
+    return new Date(date2).getTime() - new Date(date1).getTime();
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var newsContainer = document.getElementById('news-container');
+    var newsItems = Array.from(newsContainer.getElementsByClassName('news-item'));
+    var popup = document.getElementById('popup');
+    var popupNewsType = document.getElementById('popup-news-type');
+    var popupNewsDate = document.getElementById('popup-news-date');
+    var popupNewsTitle = document.getElementById('popup-news-title');
+    var popupNewsContent = document.getElementById('popup-news-content');
+    var popupClose = document.getElementById('popup-close');
     
+    newsItems.sort(function (a, b) {
+      return compareDates(a.dataset.published, b.dataset.published);
+    }).forEach(function (item) {
+      newsContainer.appendChild(item);
+    });
+
+    newsItems.forEach(function (item) {
+      item.addEventListener('click', function () {
+        var type = item.dataset.type;
+        var date = item.dataset.published;
+        var title = item.dataset.title;
+        var content = item.dataset.content;
+
+        popupNewsType.textContent = type === "announcement" ? "お知らせ" : type === "update" ? "アップデート" : "不具合";
+        popupNewsDate.textContent = date;
+        popupNewsTitle.textContent = title;
+        popupNewsContent.textContent = content;
+
+        popupNewsType.className = "news-type " + type;
+        popup.style.display = 'flex';
+      });
+    });
+
+    popupClose.addEventListener('click', function () {
+      popup.style.animation = 'fadeOut 0.3s ease-in-out';
+      setTimeout(function () {
+        popup.style.display = 'none';
+        popup.style.animation = '';
+      }, 300);
+    });
+
+    var now = new Date();
+    newsItems.forEach(function (item) {
+      var publishedDate = new Date(item.dataset.published);
+      if (publishedDate > now) {
+        item.style.display = 'none';
+        setTimeout(function () {
+          item.style.display = 'block';
+        }, publishedDate.getTime() - now.getTime());
+      }
+    });
+  });
+
+  document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+  });
+  document.addEventListener('selectstart', function (e) {
+    e.preventDefault();
+  });
+</script>
+
 </body>
 </html>
