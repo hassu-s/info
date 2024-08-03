@@ -76,6 +76,18 @@
     background-color: rgb(83, 83, 83);
   }
 
+  .news-type.maintenance {
+    background-color: rgb(151, 0, 206);
+  }
+
+  .news-type.app {
+    background-color: rgb(0, 123, 255);
+  }
+
+  .news-type.event {
+    background-color: rgb(255, 149, 0);
+  }
+
   .news-date {
     color: #555;
     font-size: 0.8em;
@@ -176,21 +188,48 @@
     from { opacity: 1; }
     to { opacity: 0; }
   }
+
+  img {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .img {
+    text-align: center;
+  }
+
 </style>
 </head>
 <body>
 <div class="news-container" id="news-container">
+  <div class="news-item" data-type="update" data-published="2024/07/08 23:00" data-title="Ver:1.0.0 アップデート" 
+  data-content='<h1>Ver:1.0.0 アップデート</h1>
+  <p>この度は、はっすーずリンクラ攻略部へアクセスしていただきありがとうございます。</p><p>こちらのサイトは、リンクラサークル「はっすーず」リーダーのさくらタコヤキがサイトを運営しております。</p><p>本サイトは、現在、アイテムフィルターのみをリリースしておりますが、今後、「リンクラカレンダー」「リンクラFAQ」などの機能を追加していく予定です。</p><p>本サイトのことを、どうぞよろしくお願いいたします。</p>'>
+    <div class="news-header">
+      <div class="news-header-content">
+        <div class="news-type update">アップデート</div>
+        <div class="news-date">2024/08/08 23:00</div>
+      </div>
+      <div class="news-title">Ver:1.0.0 アップデート</div>
+    </div>
+  </div>
+
   <div class="news-item" data-type="announcement" data-published="2024/07/08 23:00" data-title="はっすーずリンクラ攻略部リリースのお知らせ" 
   data-content='<h1>リリースのお知らせ</h1>
-  <p>この度は、はっすーずリンクラ攻略部へアクセスしていただきありがとうございます。</p><p>こちらのサイトは、リンクラサークル「はっすーず」リーダーのさくらタコヤキがサイトを運営しております。</p><p>本サイトは、現在、アイテムフィルターのみをリリースしておりますが、今後、「リンクラカレンダー」「リンクラFAQ」などの機能を追加していく予定です。</p><p>本サイトのことを、どうぞよろしくお願いいたします。</p><a href="https://x.com/@biju_mama" target="_blank">X-びじゅママ</a>'>
+  <div class="img"><img src="../img/お知らせ.PNG"></div>
+  <p>この度は、はっすーずリンクラ攻略部へアクセスしていただきありがとうございます。</p><p>こちらのサイトは、リンクラサークル「はっすーず」リーダーのさくらタコヤキがサイトを運営しております。</p><p>本サイトは、現在、アイテムフィルターのみをリリースしておりますが、今後、「リンクラカレンダー」「リンクラFAQ」などの機能を追加していく予定です。</p><p>本サイトのことを、どうぞよろしくお願いいたします。</p>'>
     <div class="news-header">
       <div class="news-header-content">
         <div class="news-type announcement">お知らせ</div>
-        <div class="news-date">2024/08/02 23:00</div>
+        <div class="news-date">2024/08/08 23:00</div>
       </div>
       <div class="news-title">はっすーずリンクラ攻略部リリースのお知らせ</div>
     </div>
   </div>
+
+
+<!-- ここに新しいニュースを掲載 -->
+
 </div>
 
 <div class="popup" id="popup">
@@ -234,7 +273,7 @@
         var title = item.dataset.title;
         var content = item.dataset.content;
 
-        popupNewsType.textContent = type === "announcement" ? "お知らせ" : type === "update" ? "アップデート" : "不具合";
+        popupNewsType.textContent = type === "announcement" ? "お知らせ" : type === "update" ? "アップデート" : type === "maintenance" ? "メンテナンス" : type === "app" ? "アプリ情報" : type === "event" ? "イベント" : "不具合";
         popupNewsDate.textContent = date;
         popupNewsTitle.textContent = title;
         popupNewsContent.innerHTML = content;
