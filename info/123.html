@@ -3,23 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ニュース</title>
+  <title>自動投稿付きアコーディオンメニュー</title>
   <script src="https://hassu-s.github.io/linklike/javascript/rule.js"></script>
   <link href="https://hassu-s.github.io/linklike/css/all1.css" rel="stylesheet" type="text/css">
 
   <style>
     body {
       font-family: 'Noto Sans JP', sans-serif;
+      padding: 0px;
     }
 
     .accordion {
       background-color: #fff;
       border-radius: 5px;
       box-shadow: 0px 0px 3px 0px rgba(100, 100, 100);
-      margin-bottom: 0px;
+      margin-bottom: 10px;
       overflow: hidden;
       transition: max-height 0.4s ease, padding 0.4s ease;
-      max-height: 105px; /* 初期はタイトル部分だけ表示 */
+      max-height: 95px; /* 初期はタイトル部分だけ表示 */
       position: relative;
       padding: 0; /* パディングを0にして、開閉時にレイアウトが崩れないように */
     }
@@ -49,7 +50,7 @@
     }
 
     .accordion.active {
-      max-height: 1000px; /* アコーディオンが開いたときの最大の高さ */
+      max-height: 500px; /* アコーディオンが開いたときの最大の高さ */
     }
 
     .accordion-title {
@@ -114,7 +115,6 @@
     }
     p {
         font-size: 13px;
-        font-weight: 500;
     }
     .imgc {
         width: 98%;
@@ -124,10 +124,6 @@
         margin-left: auto;
         margin-right: auto;
         display: block;
-    }
-    #body {
-      padding: 10px;
-      margin: 0px;
     }
 
 
@@ -156,30 +152,10 @@
     }
   </style>
 </head>
-<body id="body">
+<body>
 
 <!-- アコーディオン項目 -->
-
-<div class="accordion hidden unread" data-time="2024/07/31 23:00">
-  <div class="accordion-title">
-    <div id="data">
-        <div class="news1" id="n1">お知らせ</div>
-        <div class="time">2024/08/31</div>
-    </div>
-        <div class="title">はっすーずリンクラ攻略部開発情報 Vol.1</div>
-  </div>
-  <div class="unread-mark"><img class="info" src="../img/webp/!.webp"></div>
-  <div class="accordion-content">
-    <img class="imgc" src="../img/news/お知らせ.webp">
-    <p>この度は「はっすーずリンクラ攻略部」へアクセスしていただき、ありがとうございます。サイトの開発状況とリリース予定についてお知らせをいたします。</p>
-    <p>まずは、当初予定していた期日までに開発が間に合っていないことをお詫び申し上げます。</p>
-    <p>現在、本サイトではリンクラのライグラ基礎として「アイテムフィルター」、スクールアイドルコネクトのフィルタ機能、せーはす/みらくらラジオシリーズのフィルタ、カード情報、楽曲情報等々の実装を予定しております。開発詳細はデベロッパサイトにて公開しております。</p>
-    <p>リリース予定は9月末を予定しております。</p>
-    <p>今後も適宜コンテンツ追加を行ってまいりますので、「はっすーずリンクラ攻略部」をお願い致します。</p>
-  </div>
-</div>
-
-<div class="accordion hidden unread" data-time="2099/08/01 10:00">
+<div class="accordion hidden unread" data-time="2024/08/01 10:00">
   <div class="accordion-title">
     <div id="data">
         <div class="news1" id="n1">お知らせ</div>
@@ -190,7 +166,7 @@
   <div class="unread-mark"><img class="info" src="../img/webp/!.webp"></div>
   <div class="accordion-content">
     <img class="imgc" src="../img/news/お知らせ.webp">
-    <p>ここにコンテンツがきます</p>
+    <p>コンテンツ1の内容がここに入ります。</p>
   </div>
 </div>
 
