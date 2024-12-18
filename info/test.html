@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ニュース</title>
+  <link href="https://hassu-s.github.io/linklike/css/all1.css" rel="stylesheet" type="text/css">
+
+  <style>
+    /* 既存のスタイル */
+    .accordion-content {
+      display: none; /* 初期状態では非表示 */
+      transition: max-height 0.2s ease-out;
+    }
+    .accordion.active .accordion-content {
+      display: block;
+    }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .accordion {
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 3px 0px rgba(100, 100, 100);
+      margin-bottom: 0px;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      max-height: 105px; /* 初期はタイトル部分だけ表示 */
+      position: relative;
+      padding: 0; /* パディングを0にして、開閉時にレイアウトが崩れないように */
+      margin-bottom: 10px;
+    }
+
+    .accordion.hidden {
+      display: none; /* 指定時間になるまで非表示 */
+    }
+
+    .accordion.unread .unread-mark {
+      display: block; /* 未読の場合にマークを表示 */
+    }
+
+    .unread-mark {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 15px;
+      height: 15px;
+      background-color: rgb(255, 0, 98);
+      border-radius: 100%;
+      display: none;
+      font-size: 10px;
+      text-align: center;
+      color: #fff;
+      padding: 2px;
+      box-shadow: 0px 0px 2px 0px rgba(100, 100, 100);
+    }
+
+    .accordion.active {
+      max-height: 1000px; /* アコーディオンが開いたときの最大の高さ */
+    }
+
+    .accordion-title {
+      background-color: #fff;
+      color: #5f6b76;
+      padding: 15px;
+      font-size: 18px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .accordion-title:hover {
+      background-color: #f7f8f8;
+    }
+
+    .accordion-content {
+      padding: 10px;
+      background-color: #fff;
+      display: none; /* 初期状態では非表示 */
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .accordion.active .accordion-content {
+      display: block;
+      opacity: 1;
+    }
+
+    .info {
+      width: 13px;
+      height: 13px;
+      position: relative;
+      top: 0px;
+    }
+
+    /* タッチエフェクト */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.6);
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+      pointer-events: none;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    #data {
+      display: flex;
+      align-items: center;
+    }
+
+    #data .news1, #data .time {
+      margin-right: 10px; /* 要素間のスペースを調整 */
+    }
+    p {
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .imgc {
+      width: 98%;
+      max-width: 400px;
+      border-radius: 5px;
+      position: relative;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+    }
+    #body {
+      padding: 10px;
+      margin: 0px;
+    }
+
+
+    /* ここからニュースタグ付け */
+    .news1 {
+        font-size: 14px;
+        color: #fff;
+    }
+    .time {
+        font-size: 14px;
+        color: #5f6b76;
+    }
+    #n1 {
+        background-color: rgb(0, 190, 22);
+        width: 100px;
+        text-align: center;
+        padding: 3px;
+        border-radius: 5px;
+    }
+
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body id="body">
+  <!-- 動的コンテンツのためのプレースホルダー -->
+  <div id="news-container"></div>
+
+  <script>
+    const jsonUrl = 'https://script.google.com/macros/s/AKfycbws__guoDL6PkD_z2SVALhlC_XSg14Kpnw5dZvgOf5qp6S3ntvwh0GNahHPP7tEfCRJ/exec';
+
+    async function fetchNews() {
+      try {
+        const response = await fetch(jsonUrl);
+        const jsonData = await response.json();
+        return jsonData;
+      } catch (error) {
+        console.error('Error fetching news:', error);
+        return [];
+      }
+    }
+
+    function generateAccordion(news) {
+      return `
+        <div class="accordion unread">
+          <div class="accordion-title">
+            <div id="data">
+              <div class="news1" id="n1">${news.c2}</div>
+              <div class="time">${new Date(news.c1).toLocaleDateString('ja-JP')}</div>
+            </div>
+            <div class="title">${news.c3}</div>
+          </div>
+          <div class="unread-mark"><img class="info" src="../img/webp/!.webp"></div>
+          <div class="accordion-content">
+            <img class="imgc" src="../img/news/お知らせ.webp">
+            <p>${news.c4}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    async function populateNews() {
+      const container = document.getElementById('news-container');
+      const newsData = await fetchNews();
+      container.innerHTML = newsData.map(generateAccordion).join('');
+
+      // アコーディオンの開閉機能を追加
+      document.querySelectorAll('.accordion-title').forEach(title => {
+        title.addEventListener('click', function() {
+          const accordion = this.parentElement;
+          accordion.classList.toggle('active');
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      populateNews();
+    });
+  </script>
+
+  <script src="https://hassu-s.github.io/linklike/javascript/rule.js"></script>
+</body>
+</html>
