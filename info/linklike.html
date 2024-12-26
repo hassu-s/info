@@ -76,7 +76,7 @@
             opacity: 1;
         }
         img {
-            width: 98%;
+            width: 100%;
             max-width: 400px;
             border-radius: 5px;
             position: relative;
@@ -129,6 +129,11 @@
             border-radius: 5px;
             color: #fff;
         }
+        #btnz {
+            box-shadow: none;
+            border-radius: 50px;
+            border: 1px solid #717171;
+        }
     </style>
 </head>
 <body>
@@ -170,7 +175,7 @@
             var bodyContent = item.c4.replace(/\\/g, '<br>')
                                      .replace(/;;img;;(.+?);;(.+?);;/g, '<img src="$2" alt="$1">')
                                      .replace(/;;link;;(.+?);;(.+?);;/g, '<a href="$2">$1</a>')
-                                     .replace(/;;btn;;(.+?);;(.+?);;/g, '<button onclick="window.open(\'$2\', \'_blank\')">$1</button>')
+                                     .replace(/;;btn;;(.+?);;(.+?);;/g, '<button id="btnz" onclick="window.open(\'$2\', \'_blank\')">$1</button>')
                                      .replace(/;;st;;(.+?);;/g, '<p class="stp">$1</p>')
                                      .replace(/;;ti;;(.+?);;/g, '<p class="tip">$1</p>')
                                      .replace(/;;bo;;(.+?);;/g, '<span href="" class="bop">$1</span>');
